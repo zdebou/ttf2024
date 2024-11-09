@@ -24,3 +24,15 @@ registerRoute(new NavigationRoute(
 
 self.skipWaiting()
 clientsClaim()
+
+self.addEventListener('push', function(event: PushEvent) {
+  const data = event?.data?.text() ?? "Empty";  // Assuming the server sends JSON
+  const options = {
+      body: data,
+      icon: 'icon.png',
+      badge: 'badge.png'
+  };
+  event.waitUntil(
+      self.registration.showNotification("TTF Tap-To-Check", options)
+  );
+});

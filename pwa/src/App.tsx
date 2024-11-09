@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import appLogo from '/favicon.svg'
 import PWABadge from './PWABadge.tsx'
 import './App.css'
+import Cookies from 'universal-cookie';
+import { ShowNotification } from './utils.ts'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +23,16 @@ function App() {
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
+        </button>
+        <button onClick={() => {
+          Notification.requestPermission()
+        }}>
+          Permission Push notification
+        </button>
+        <button onClick={() => {
+          ShowNotification()
+        }}>
+          Test notification
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
