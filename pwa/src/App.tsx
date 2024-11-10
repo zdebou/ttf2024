@@ -3,8 +3,28 @@ import reactLogo from './assets/react.svg'
 import appLogo from '/favicon.svg'
 import PWABadge from './PWABadge.tsx'
 import './App.css'
-import { notifyMe, ShowNotification } from './utils.ts'
+import { getBackEnd, notifyMe, ShowNotification } from './utils.ts'
 import QRCode from 'react-qr-code'
+import Cookies from 'universal-cookie';
+
+
+function onButtonClick(){
+
+  var cookie = new Cookies().get("sub")
+  console.log(cookie, "onButtonClick")
+  fetch(`${getBackEnd()}/sendNotification`, {
+    method: 'post',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      subscription: cookie,
+      payload: "payload",
+      delay: 5,
+      ttl: 60,
+    }),
+  });
+}
 
 function App() {
   const [count, setCount] = useState(0)
@@ -51,6 +71,16 @@ function App() {
           viewBox={`0 0 256 256`}
         />
       </div>
+      <p>This demo shows how to send push notifications with a payload.</p>
+
+      <form>
+        Notification payload: <input id='notification-payload' type='text' value='Insert here a payload'></input>
+        Notification delay: <input id='notification-delay' type='number' value='5'></input> seconds
+        Notification Time-To-Live: <input id='notification-ttl' type='number' value='0'></input> seconds
+      </form>
+
+      <button id="doIt" onClick={onButtonClick}>Request sending a notification!</button>
+
     </>
   )
 }
