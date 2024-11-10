@@ -8,16 +8,15 @@ const mysql = require("./mysql");
 const mailer = require("./mail");
 require("./push");
 
-const realAddress = "185-8-164-54.nip.io";
-const baseUrl = "https://185-8-164-54.nip.io:10443";
-const clientId = "example-client-id";
-const clientSecret = "secret-a";
+const baseUrl = process.env.GOVSSO_BASE_URL;
+const clientId = process.env.GOVSSO_CLIENT_ID;
+const clientSecret = process.env.GOVSSO_CLIENT_SECRET;
 
-let redirect_uri = "http://185-8-164-54.nip.io:4000/";
+let redirect_uri = "http://"+process.env.GOVSSO_REDIRECT_ADDRESS+":4000/";
 
-const finalRedirect = "https://zdebou.github.io/ttf2024";
+const finalRedirect = process.env.FINAL_REDIRECT;
 
-const recipient = "ado4007@gmail.com";
+const recipient = process.env.HOTEL_MAIL;
 
 const port = 4000;
 
@@ -59,15 +58,13 @@ async function main() {
     app.get('/init', (req, res) => {
         console.log("GET /init "+req.socket.remoteAddress);
         if(req.query.roomId==null || typeof(req.query.roomId)!=="string") {
-            res.write("You fucking cunt! Ty vyjebany kokot! Hurensohn!");
-            res.end();
+            res.sendStatus(400);
             return;
         }
 
         const parsedRoomId = parseInt(req.query.roomId);
         if(isNaN(parsedRoomId)){
-            res.write("You fucking cunt! Ty vyjebany kokot! Hurensohn!");
-            res.end();
+            res.sendStatus(400);
             return;
         }
 
@@ -82,8 +79,6 @@ async function main() {
 
         let redirectTo = client.buildAuthorizationUrl(config, parameters);
 
-        redirectTo.hostname = realAddress;
-
         res.writeHead(302, {
             'Location': redirectTo.href
         });
@@ -96,15 +91,13 @@ async function main() {
             req.query.code==null || typeof(req.query.code)!=="string" ||
             req.query.state==null || typeof(req.query.state)!=="string"
         ) {
-            res.write("You fucking cunt! Ty vyjebany kokot! Hurensohn!");
-            res.end();
+            res.sendStatus(400);
             return;
         }
 
         const roomId = roomIdMap[req.query.state];
         if(roomId==null) {
-            res.write("You fucking cunt! Ty vyjebany kokot! Hurensohn!");
-            res.end();
+            res.sendStatus(400);
             return;
         }
 
@@ -113,8 +106,7 @@ async function main() {
             jwtData = await getData(req.query.code);
         } catch (e) {
             console.error(e);
-            res.write("You fucking cunt! Ty vyjebany kokot! Hurensohn!");
-            res.end();
+            res.sendStatus(400);
             return;
         }
 

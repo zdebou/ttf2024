@@ -1,5 +1,5 @@
 node_modules
-.env
+_.env
 fullchain.pem
 privkey.pem
 package-lock.json

@@ -1,8 +1,8 @@
 const nodemailer = require("nodemailer");
 
-const mailService = "gmail.com";
-const mailUser = "hotel.touristx.room420@gmail.com";
-const mailPassword = "omod vemf dpqr uarw";
+const mailService = process.env.APP_MAIL_SERVICE;
+const mailUser = process.env.APP_MAIL_USER;
+const mailPassword = process.env.APP_MAIL_PASSWORD;
 
 const transporter = nodemailer.createTransport({
     service: mailService,

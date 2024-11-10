@@ -1,8 +1,8 @@
 const mqtt = require("mqtt");
 
-const mqttClient = mqtt.connect("mqtt://185.8.164.54", {
-    username: "server",
-    password: "90ugt989gh98egj80verj0",
+const mqttClient = mqtt.connect("mqtt://"+process.env.MQTT_ADDRESS, {
+    username: process.env.MQTT_USERNAME,
+    password: process.env.MQTT_PASSWORD,
     protocolVersion: 5
 });
 
