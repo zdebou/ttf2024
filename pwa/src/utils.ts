@@ -35,7 +35,7 @@ export function notifyMe() {
             // If the user accepts, let's create a notification
             if (permission === "granted") {
                 navigator.serviceWorker.ready.then(function (registration) {
-                    registration.showNotification('Notification with ServiceWorker');
+                    registration.showNotification("Discount me");
                 });
             }
         });

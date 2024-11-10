@@ -21,7 +21,10 @@ function onButtonClick(){
     },
     body: JSON.stringify({
       subscription: cookie,
-      payload: "payload",
+      payload: JSON.stringify({
+        title: "Get discount 30%! on spa",
+        content: "Exclusive spa experience"
+      }),
       delay: 5,
       ttl: 60,
     }),
@@ -113,10 +116,10 @@ function WelcomePage() {
         }}
       >
         <div className="bg-black bg-opacity-50 p-6 rounded-md">
-          <h1 className="text-4xl font-bold">Welcome to TTF Hotel!</h1>
+          <h1 className="text-4xl font-bold">Welcome {name} to TTF Hotel!</h1>
           <p className="mt-2 text-lg">Booking ID: <span className="font-semibold">#{bid}</span></p>
           {rid && <p className="mt-2 text-lg">Room: <span className="font-semibold">#{rid}</span></p>}
-          {(name || surname) && <p className="mt-2 text-lg">Room: <span className="font-semibold">{name} {surname}</span></p>}
+          {(name || surname) && <p className="mt-2 text-lg">Name: <span className="font-semibold">{name} {surname}</span></p>}
         </div>
       </header>
 

@@ -28,14 +28,14 @@ clientsClaim()
 
 self.addEventListener('push', function(event: PushEvent) {
   console.log("Push notification")
-  const data = event?.data?.text() ?? "Empty";  // Assuming the server sends JSON
+  const data = event?.data?.json() ?? {};  // Assuming the server sends JSON
   const options = {
-      body: data,
-      icon: 'icon.png',
-      badge: 'badge.png'
+      body: data?.content,
+      icon: 'favicon.svg',
+      badge: './badge.png',
   };
   IncreaseUpdateBadge(),
   event.waitUntil(
-      self.registration.showNotification("TTF Tap-To-Check", options)
+      self.registration.showNotification(data?.title, options)
   );
 });
