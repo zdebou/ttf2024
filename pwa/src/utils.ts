@@ -43,8 +43,9 @@ export function notifyMe() {
       Notification.requestPermission().then((permission) => {
         // If the user accepts, let's create a notification
         if (permission === "granted") {
-          new Notification("Hi there!");
-          // …
+            navigator.serviceWorker.ready.then(function(registration) {
+                registration.showNotification('Notification with ServiceWorker');
+            });
         }
       });
     }
