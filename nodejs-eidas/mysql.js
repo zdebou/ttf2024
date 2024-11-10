@@ -4,9 +4,9 @@ let mysqlConnection;
 
 async function connect() {
     mysqlConnection = await mysql.createConnection({
-        host: "127.0.0.1",
-        user: "adam",
-        password: "admin"
+        host: process.env.MYSQL_ADDRESS,
+        user: process.env.MYSQL_USERNAME,
+        password: process.env.MYSQL_PASSWORD
     });
 }
 

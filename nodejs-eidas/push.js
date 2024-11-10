@@ -13,7 +13,9 @@ if (!process.env.VAPID_PUBLIC_KEY || !process.env.VAPID_PRIVATE_KEY) {
         "You must set the VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY " +
         "environment variables. You can use the following ones:"
     );
-    console.log(webPush.generateVAPIDKeys());
+    const {privateKey, publicKey} = webPush.generateVAPIDKeys();
+    fs.appendFileSync(".env", "VAPID_PUBLIC_KEY=\""+publicKey+"\"\n");
+    fs.appendFileSync(".env", "VAPID_PRIVATE_KEY=\""+privateKey+"\"\n");
     return;
 }
 
