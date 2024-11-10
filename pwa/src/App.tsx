@@ -3,7 +3,6 @@ import reactLogo from './assets/react.svg'
 import appLogo from '/favicon.svg'
 import PWABadge from './PWABadge.tsx'
 import './App.css'
-import Cookies from 'universal-cookie';
 import { ShowNotification } from './utils.ts'
 
 function App() {
