@@ -31,8 +31,8 @@ self.addEventListener('push', function(event: PushEvent) {
   const data = event?.data?.json() ?? {};  // Assuming the server sends JSON
   const options = {
       body: data?.content,
-      icon: 'favicon.svg',
-      badge: './badge.png',
+      icon: 'badge.png',
+      badge: 'badge.png',
   };
   IncreaseUpdateBadge(),
   event.waitUntil(
