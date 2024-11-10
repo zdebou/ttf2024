@@ -2,6 +2,7 @@
 import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching'
 import { clientsClaim } from 'workbox-core'
 import { NavigationRoute, registerRoute } from 'workbox-routing'
+import { IncreaseUpdateBadge } from './utils'
 
 declare let self: ServiceWorkerGlobalScope
 
@@ -26,12 +27,14 @@ self.skipWaiting()
 clientsClaim()
 
 self.addEventListener('push', function(event: PushEvent) {
+  console.log("Push notification")
   const data = event?.data?.text() ?? "Empty";  // Assuming the server sends JSON
   const options = {
       body: data,
       icon: 'icon.png',
       badge: 'badge.png'
   };
+  IncreaseUpdateBadge(),
   event.waitUntil(
       self.registration.showNotification("TTF Tap-To-Check", options)
   );

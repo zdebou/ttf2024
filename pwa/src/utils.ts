@@ -5,7 +5,10 @@ const cookies = new Cookies();
 export function getBackEnd(){
     return "https://185-8-164-54.nip.io:3000"
 }
-
+export function IncreaseUpdateBadge(){
+    cookies.set("notif", cookies.get("notif") ?? 0)
+    UpdateBadge()
+}
 export function UpdateBadge() {
     if (navigator.setAppBadge) {
         const v = cookies.get("notif") ?? 0
