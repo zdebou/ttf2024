@@ -3,23 +3,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 export function getBackEnd(){
-    return "http://185-8-164-54.nip.io:3000"
-}
-
-export function ShowNotification() {
-    const v = (cookies.get("notif") ?? 0) + 1;
-    cookies.set("notif", v)
-
-    const notifTitle = `Test ${v}`;
-    const notifBody = `Created by test.`;
-    const notifImg = `/src/assets/react.svg`;
-    const options = {
-        body: notifBody,
-        icon: notifImg,
-    };
-    new Notification(notifTitle, options);
-
-    UpdateBadge()
+    return "https://185-8-164-54.nip.io:3000"
 }
 
 export function UpdateBadge() {

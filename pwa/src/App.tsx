@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import appLogo from '/favicon.svg'
 import PWABadge from './PWABadge.tsx'
 import './App.css'
-import { getBackEnd, notifyMe, ShowNotification } from './utils.ts'
+import { getBackEnd, notifyMe } from './utils.ts'
 import QRCode from 'react-qr-code'
 import Cookies from 'universal-cookie';
 
@@ -44,16 +44,15 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <button onClick={() => {
+
+        <button disabled={Notification.permission !== "default"} onClick={() => {
           Notification.requestPermission()
         }}>
-          Permission Push notification
+          Permission Push notification 
+          {Notification.permission === "denied" ? " Denied" : ""}
         </button>
-        <button onClick={() => {
-          ShowNotification()
-        }}>
-          Test notification
-        </button>
+
+
         <button onClick={notifyMe}>Notify me!</button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
